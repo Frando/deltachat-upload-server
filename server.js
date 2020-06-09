@@ -9,9 +9,11 @@ const app = express()
 const config = {
   path: process.env.UPLOAD_PATH || p.resolve('./uploads'),
   port: process.env.PORT || 8080,
-  hostname: process.env.HOSTNAME || 'localhost',
+  hostname: process.env.HOSTNAME || '0.0.0.0',
   baseurl: process.env.BASE_URL || null
 }
+
+if (!config.baseurl.endsWith('/')) config.baseurl = config.baseurl + '/'
 
 if (!fs.existsSync(config.path)) {
   fs.mkdirSync(config.path, { recursive: true })
